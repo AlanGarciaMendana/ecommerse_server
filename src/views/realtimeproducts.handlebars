@@ -1,0 +1,43 @@
+<h1 class="title_index">Real time products</h1>
+<Button id="showFormBtn" class="bttn_newproduct">Crear nuevo producto</Button>
+<div class="form-container"id="formContainer">
+    <form id="productForm">
+        <div class="form-products" >
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-products">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+        </div>
+        <div class="form-products">
+            <label for="code">Code</label>
+            <input type="text" id="code" name="code" required>
+        </div>
+        <div class="form-products">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+        </div>
+        <div class="form-products">
+            <label for="stock">Stock</label>
+            <input type="number" id="stock" name="stock" required>
+        </div>
+        <div class="form-products">
+            <label for="category">Category</label>
+            <input type="text" id="category" name="category" required>
+        </div>
+        <div class="form-products">
+            <button type="submit">Guardar Producto</button>
+            <button id="cancel_form" type="cancel" style="background-color:red">X</button>
+        </div>
+    </form>
+</div>
+
+    </div>
+    <h2>Lista de productos:</h2>
+    <div id="cardproduct_container" class="cardproduct_container">
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script src="js/main.js"></script>
+

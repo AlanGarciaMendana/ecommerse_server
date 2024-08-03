@@ -1,0 +1,19 @@
+
+    
+    <h1 class="title_index">Bienvenidos a mi Ecommers</h1>
+
+    <h2 class="title2_index">Lista de Productos:</h2>
+<div class="cardproduct_container">
+    {{#each arrayProductos}}
+    <div class="product_card">
+        <h2 class="product_card_title">{{this.title}}</h2>
+        <p class="product_card_p">{{this.description}}</p>
+        <p class="product_card_p">Precio: ${{this.price}}</p>
+        <p class="product_card_p">Stock: {{this.stock}}</p>
+        <button class="bttn_newproduct">Agregar al carrito</button>
+    </div>
+    {{/each}}
+    </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+<script src="js/main.js"></script>

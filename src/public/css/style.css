@@ -1,0 +1,81 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.title_index{
+    text-align: center;
+    justify-content: center;
+}
+.cardproduct_container{
+    margin-top: 30px;
+
+   display: flex;
+   justify-content: space-around;
+
+}
+.product_card{
+
+    border: solid black 1px;
+    width: 200px;
+    border-radius: 20px;
+ background-color: aqua;
+    padding: 5px;
+    text-align: center;
+    justify-content: space-between;
+    
+}
+
+.form-container {
+    margin: auto;
+    justify-content: center;
+    width: 420px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+.form-products {
+    margin-bottom: 15px;
+}
+.form-products label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.form-products input,
+.form-products textarea,
+.form-products select {
+    width: 400px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.form-products textarea {
+    resize: vertical;
+}
+.form-products button, .bttn_newproduct, .product_card button, a {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+}
+.form-products button:hover {
+    background-color: #0056b3;
+}
+.bttn_newproduct:hover{
+    background-color: #0056b3;
+}
+header{
+    margin-bottom: 30px;
+    justify-content: center;
+    text-align: center;
+}
+a:hover{
+    background-color: gray;
+}

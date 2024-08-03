@@ -4,10 +4,7 @@ import { ProductManager } from "../controllers/product--manager.js";
 const router = Router();
 const manager = new ProductManager('./src/data/products.json'); 
 
-router.get("/", (req,res)=>{
-    res.send("PAGINA PRINCIPAL")
 
-})
 router.get("/api/products", async (req, res) => {
     let limit = req.query.limit;
     try {
@@ -21,6 +18,7 @@ router.get("/api/products", async (req, res) => {
     } catch (error) {
         res.send({ message: error.message });
     }
+    
 });
 
 router.get("/api/products/:id", async (req, res) => {
