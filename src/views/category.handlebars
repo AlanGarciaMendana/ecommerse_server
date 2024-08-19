@@ -1,13 +1,18 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producto</title>
+    <link rel="stylesheet" href="/css/style.css">
 
-    
-    <h1 class="title_index">EL MERCADER DE VENECIA</h1>
-
+<h1 class="title_index">EL MERCADER DE VENECIA</h1>
 
 <div class="category-filters">
     {{#each categories}}
         <a href="/%60/category/{{this}}%60" class="category-button">{{this}}</a>
     {{/each}}
 </div>
+<h1 style="justify-content: center;text-align:center;font-size:20px">{{this.category}}</h1>
       <hr>
 <div class="cardproduct_container">
    
@@ -15,7 +20,7 @@
     <div class="product_card">
         <h2 class="product_card_title">{{this.title}}</h2>
         <p class="product_card_p">Precio: ${{this.price}}</p>
-         <a href=`/product/{{this._id}}` class="detail-button" id="detail-button">Detalles</a> 
+         <a href="/%60/product/{{this._id}}%60" class="detail-button" id="detail-button">Detalles</a> 
         <button class="bttn_newproduct">Agregar al carrito</button>
     </div>
     {{/each}}
@@ -24,17 +29,14 @@
       <hr>
     <div class="paginater">
     {{#if hasPrevPage}}
-    <a href="/?page={{prevPage}}"class="detail-button">Anterior</a>
+    <a href="/category/{{category}}?page={{prevPage}}" class="detail-button">Anterior</a>
     {{/if}}
     <p style="font-weight: bolder;">
         Pagina {{currentPage}} de {{totalPages}}
     </p>
     {{#if hasNextPage}}
-    <a href="/?page={{nextPage}}"class="detail-button">Siguiente</a>
+    <a href="/%60/category/{{category}}%60?page={{nextPage}}" class="detail-button">Siguiente</a>
     {{/if}}
    
     </div>
     
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
-<script src="js/main.js"></script>

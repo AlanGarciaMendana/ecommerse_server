@@ -1,4 +1,6 @@
+
 const socket = io()
+
 
 
 document.getElementById("showFormBtn").addEventListener("click", function() {
@@ -14,28 +16,54 @@ document.getElementById("cancel_form").addEventListener("click", function() {
 
     })
 
-     const renderProducts= (products)=>{
-        const contenedorProductos= document.getElementById ("cardproduct_container")
-        contenedorProductos.innerHTML=""
-        products.forEach(item =>{
-            const card= document.createElement("div")
-            card.classList.add("product_card")
-            card.innerHTML = 
-            `<h2>${item.title}</h2>
-            <p>ID: ${item.id}</p>
-        <p>${item.description}</p>
-        <p>Precio: ${item.price}</p>
-        <p>Stock: ${item.stock}</p>
-        <button>Eliminar Producto</button>
-       `
-       contenedorProductos.appendChild(card)
-       card.querySelector("button").addEventListener("click",()=>{
-        eliminarProducto(item.id)
-       })
-        })
-    }
+    const renderProducts = (products) => {
+        const contenedorProductos = document.getElementById("cardproduct_container");
+        contenedorProductos.innerHTML = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Descripción</th>
+                        <th>Categoria</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${products.map(item => `
+                        <tr data-id="${item._id}">
+                            <td>${item._id}</td>
+                            <td>${item.title}</td>
+                            <td>${item.description}</td>
+                            <td>${item.category}</td>
+                            <td>$${item.price}</td>
+                            <td>${item.stock}</td>
+                            <td>
+                                <button classname="icon-button" style="background-color:gray;width:fit-content;margin:auto">
+                                    <img src="https://img.icons8.com/?size=14&id=53386&format=png&color=FFFFFF" alt="Ícono de ejemplo" class="icon-image">
+                                </button>
+                                <button class="delete-button">Eliminar</button>
+                            </td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+    
+
+        products.forEach(item => {
+            const deleteButton = contenedorProductos.querySelector(`tr[data-id="${item._id}"] .delete-button`);
+            deleteButton.addEventListener("click", () => {
+                eliminarProducto(item._id);
+                console.log(item._id)
+            });
+        });
+    };
     const eliminarProducto =(id)=>{
 socket.emit("deleteproduct",id)
+
     }
 
     document.getElementById("productForm").addEventListener("submit", function(event) {
@@ -58,3 +86,6 @@ socket.emit("deleteproduct",id)
         document.getElementById("showFormBtn").style.display="block"
 
     });
+  
+
+

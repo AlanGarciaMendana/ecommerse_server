@@ -1,34 +1,24 @@
+import ProductsModel from "../models/products.model.js";
 
-
-import { promises as fs } from 'fs';
 
  export class ProductManager{
-    static ultId= 0
-    constructor(path){
-        
-        this.products =[]
-        this.path= path
-        
-    
-    }
+   
 
     async addProduct({ title, description, code, price, stock, category }) {
         if (!title || !description || !code || !price || !stock || !category) {
             console.log("Por favor completar todos los campos")
             return;
+            
         }
-
+        const validateProduct = await ProductsModel.findOne({code:code})
+        if (validateProduct) {
+            console.log("Ya existe el codigo" )
+            return
+        }
     
-        const arrayProducts = await this.getProducts()
 
-        if (arrayProducts.some(product => product.code === code)) {
-            console.log("Código Repetido")
-            return;
-        }
 
-        const maxId = arrayProducts.reduce((max, product) => product.id > max ? product.id : max, 0)
-        const product = {
-            id: maxId + 1,
+        const product = new ProductsModel( {
             title,
             description,
             code,
@@ -36,77 +26,62 @@ import { promises as fs } from 'fs';
             status: true,
             stock,
             category
-        };
+        })
 
-        arrayProducts.push(product)
-        await this.guardarArchivo(arrayProducts)
+        await product.save()
+    
     }
 
     async getProducts(){
-        const arrayProducts = await this.leerArchivo()
+        const arrayProducts = ProductModel.find()
         return arrayProducts
     }
 
     async getProductsById(id){
 
-        const arrayProducts = await this.leerArchivo()
+        const productSearch = await ProductsModel.findById(id)
 
-        const productSearch = arrayProducts.find(product => product.id === id)
+      
         if(!productSearch){
-           return "producto no encontrado"
+            console.log("producto no encontrado")
+           return 
         }else{ return productSearch}
        
     }
 
-    async leerArchivo(){
-        const respuesta = await fs.readFile (this.path,"utf-8")
-        const arrayProducts = JSON.parse(respuesta)
-        return arrayProducts
-    }
-
-    async guardarArchivo(arrayProducts){
-        await fs.writeFile(this.path, JSON.stringify(arrayProducts),null,2)
-    }
+    
 
     async removeProduct(id) {
-        const arrayProducts = await this.leerArchivo()
-        
-        
-        const filteredProducts = arrayProducts.filter(product => product.id !== id)
-    
-        if (filteredProducts.length === arrayProducts.length) {
-           
-            console.log("Producto no encontrado")
-            return "Producto no encontrado"
+
+        try {
+            const deleted = await ProductsModel.findByIdAndDelete(id)
+            if (!deleted){
+                 console.log("No existe el producto")
+                    
+                }
+                return deleted
+            }
+     catch (error) {
+            console.log(error)
+            
         }
-    
-        await this.guardarArchivo(filteredProducts)
-    
-        return "Producto eliminado con éxito"}
+        
+    }
+       
 
         async updateProduct(id, updates) {
            
-            if (!updates || typeof updates !== 'object') {
+         try {
+            const update = await ProductsModel.findByIdAndUpdate(id,updates)
+            if(!update){
+                console.log("No se encuentra el producto")
+                return
+            }
+            return update
+         } catch (error) {
+            console.log(error)
             
-                return "Actualizaciones no válidas"
-            }
-        
-            const arrayProducts = await this.leerArchivo()
-  
-            const index = arrayProducts.findIndex(product => product.id === id);
-        
-            if (index === -1) {
-             
-                return "Producto no encontrado"
-            }
-        
-            const { id: idToIgnore, ...productUpdates } = updates;
-
-            const updatedProduct = { ...arrayProducts[index], ...productUpdates };
-            arrayProducts[index] = updatedProduct;
-        
-            await this.guardarArchivo(arrayProducts)
-            return "Producto actualizado con éxito"
+         }
         }
 }
 

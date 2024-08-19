@@ -1,0 +1,17 @@
+  
+  <h1 class="title_index">EL MERCADER DE VENECIA</h1>
+
+  <div class="cardproduct_container">
+    {{#each Producto}}
+    <div class="product_card">
+        <h2 class="product_card_title">{{this.title}}</h2>
+         <p class="product_card_p">Codigo:{{this.code}}</p>
+        <p class="product_card_p">Descripcion:{{this.description}}</p>
+        <p class="product_card_p">Categoria: {{this.category}}</p>
+        <p class="product_card_p">Precio: ${{this.price}}</p>    
+         <p class="product_card_p">Stock: {{this.stock}}</p> 
+        <button class="bttn_newproduct">Agregar al carrito</button>
+    </div>
+    {{/each}}
+
+<script src="js/main.js"></script>
