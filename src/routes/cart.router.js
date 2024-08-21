@@ -53,7 +53,7 @@ try {
 }
 }) 
 
-router.delete("/api/carts/:cid/products/:pid ",async(req,res)=>{
+router.delete("/api/carts/:cid/products/:pid",async(req,res)=>{
     let cartId = req.params.cid
     let productId = req.params.pid
 
@@ -86,6 +86,19 @@ router.post("/api/carts/:cid/products/:pid",async (req,res)=>{
         res.status(500).json({ error: "Error interno del servidor" })
     }
 })
+
+router.get("/api/carts/:cid",async (req,res)=>{
+    const cartId = req.params.cid
+try{
+    const cart = await CartsModel.find(cartId)
+    res.json(cart)
+}
+catch (error) {
+res.json({ message: error.message })
+}
+})
+
+
 
 export default router 
 

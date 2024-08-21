@@ -14,7 +14,7 @@ const manager = new ProductManager()
 const app = express() 
 const PUERTO = 8080
 
-app.use(express.static ("./src/public"))
+
 
 app.engine("handlebars",exphbs.engine())
 app.set("view engine","handlebars")
@@ -27,7 +27,7 @@ app.use("/", productsRouter)
 app.use("/", viewsRouter)
 app.use("/",cartsRouter)
 
-
+app.use(express.static ("./src/public"))
 
 mongoose.connect("mongodb+srv://alitan31:alangm123@cluster0.mnv3c.mongodb.net/Supermercado?retryWrites=true&w=majority&appName=Cluster0")
 .then(()=>{console.log("Conectado al servidor de mongo")})
@@ -56,3 +56,4 @@ io.on("connection", async (socket)=>{
     })
 
 
+  

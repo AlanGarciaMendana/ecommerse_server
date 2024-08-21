@@ -87,5 +87,29 @@ socket.emit("deleteproduct",id)
 
     });
   
-
+    document.addEventListener('DOMContentLoaded', function () {
+        const items = document.querySelectorAll('.carousel-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let currentIndex = 0;
+    
+        function updateCarousel() {
+            if (items.length === 0) return; // Si no hay elementos, no hacer nada
+            items.forEach((item, index) => {
+                item.style.transform = `translateX(${(index - currentIndex) * 100}%)`;
+            });
+        }
+    
+        prevBtn.addEventListener('click', function () {
+            currentIndex = (currentIndex === 0) ? items.length - 1 : currentIndex - 1;
+            updateCarousel();
+        });
+    
+        nextBtn.addEventListener('click', function () {
+            currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
+            updateCarousel();
+        });
+    
+        updateCarousel(); // Inicializa la posición del carrusel
+    });
 

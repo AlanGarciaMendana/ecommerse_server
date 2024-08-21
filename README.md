@@ -23,6 +23,18 @@ Los productos de el archivo PRODUCTS.JSON y los carritos de CARTS.JSON
 
 - Se crea la ruta "/realtimeproducts" donde se visualiza un boton para agregar productos el cual muestra un formulario que envia a la APP el detalle del nuevo producto y visualiza en tiempo real la lista de productos con un boton para eliminar cada uno
 
+## Entrega Final
+
+- Se creo la conexion con Mongoose.
+- En la ruta Home se agrego una paginacion de todos los productos.
+- Se crearon las vistas de cada producto con una lista de productos relacionados (en construccion).
+- Se creo una vista de Categorias con un filtro por categoria.
+- En la ruta /api/products se visualizan los productos y se pueden ordenar por precio asc y des.
+- Se creo la ruta /api/carts/:cid que se visualiza en formato Json el carrito con el id enviado.
+- En la ruta /carts/:cid se visualiza el carrito con el ID enviado.
+- En los carts al agregar un producto se agrega el objeto completo.
+- Se crearon las nuevas rutas para Carts que añaden cantidad de productos enviados por body, elimina todos los productos y se elimina el producto enviado.
+- En la vision RealTimeProducts se agrego un boton para subir las fotos de los productos(en construccion).
 
 
 

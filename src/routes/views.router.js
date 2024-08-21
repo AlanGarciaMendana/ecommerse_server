@@ -44,10 +44,45 @@ router.get("/realtimeproducts", async (req,res)=>{
 })
 
 router.get("/%60/product/:id%60", async (req, res) => {
-    try {
-        const productId = req.params.id
-        const producto = await ProductsModel.findById(productId).lean()  
-        res.render("product", { producto }) 
+  try {
+    const productId = req.params.id
+    const page = parseInt(req.query.page) || 1
+    const limit = 3 
+
+
+    const producto = await ProductsModel.findById(productId).lean()
+
+    if (!producto) {
+        return res.status(404).render("error", { message: "Producto no encontrado" })
+    }
+
+
+    const productosRelacionados = await ProductsModel.paginate({
+      category: producto.category, 
+      _id: { $ne: productId } 
+  },{
+      page,
+      limit,
+  })
+
+
+  const productosRelacionadosFinal = productosRelacionados.docs.map(producto => {
+      const { _id, ...rest } = producto.toObject();
+      return { _id, ...rest };
+  });
+
+  // Renderiza la vista del producto con los productos relacionados
+  res.render("product", {
+      producto,
+      productosRelacionados: productosRelacionadosFinal,
+      hasPrevPage: productosRelacionados.hasPrevPage,
+      hasNextPage: productosRelacionados.hasNextPage,
+      prevPage: productosRelacionados.prevPage,
+      nextPage: productosRelacionados.nextPage,
+      currentPage: productosRelacionados.page,
+      totalPages: productosRelacionados.totalPages
+  
+    });
     } catch (error) {
         res.status(500).render("error", { message: error.message }) 
     }

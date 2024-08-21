@@ -18,5 +18,24 @@
            <p class="product_card_p">Stock:{{producto.stock}}</p>
         <button class="bttn_newproduct">Agregar al carrito</button>
     </div>
+    <div>
+<h3>PRODUCTOS RELACIONADOS</h3>
 
+<div class="carousel">
+    <button class="carousel-button prev" id="prevBtn">&lt;</button>
+    <div class="carousel-inner">
+        {{#each productosRelacionados}}
+            <div class="carousel-item">
+                <div class="product_card2">
+                    <h2 class="product_card_title">{{this.title}}</h2>
+                    <p class="product_card_p">Codigo: {{this.code}}</p>
+                    <p class="product_card_p">Precio: ${{this.price}}</p>
+                    <a href="/%60/product/{{this._id}}%60" class="bttn_newproduct">Ver producto</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    <button class="carousel-button next" id="nextBtn">&gt;</button>
+</div>
 
+<script src="/js/main.js"></script>

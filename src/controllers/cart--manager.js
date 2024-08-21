@@ -98,5 +98,30 @@ try {
                 throw error;
             }
         }
+        
+        async deleteProductFromCart(cartId, productId) {
+            try {
+                const searchCart = await CartsModel.findById(cartId);
+        
+                if (!searchCart) {
+                    console.log(`Carrito con ID ${cartId} no encontrado`);
+                    return;
+                }
+        
+                const productIndex = searchCart.products.findIndex(product => product.product.toString() === productId);
+        
+                if (productIndex > -1) {
+                    searchCart.products = searchCart.products.filter(p => p.product.toString() !== productId);
+                    searchCart.markModified("products");
+                    await searchCart.save();
+                    console.log(`Producto con ID ${productId} eliminado del carrito ${cartId}`);
+                } else {
+                    console.log(`Producto con ID ${productId} no encontrado en el carrito ${cartId}`);
+                }
+        
+            } catch (error) {
+                console.log(error);
+            }
+        }
 }
 
