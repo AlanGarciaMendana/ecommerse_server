@@ -42,6 +42,16 @@ router.get("/realtimeproducts", async (req,res)=>{
     await console.log("realtimeproducts")
     res.render("realtimeproducts")
 })
+router.get("/login", async (req,res)=>{
+  await console.log("login")
+  res.render("login")
+})
+router.get("/register", async (req,res)=>{
+  await console.log("register")
+  res.render("register")
+})
+
+
 
 router.get("/%60/product/:id%60", async (req, res) => {
   try {

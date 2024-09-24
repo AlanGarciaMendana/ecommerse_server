@@ -2,6 +2,10 @@
     
     <h1 class="title_index">EL MERCADER DE VENECIA</h1>
 
+    <h2>¡Bienvenido, {{firstName}} {{lastName}}!</h2>
+    <form action="/api/sessions/logout" method="POST">
+    <button type="submit"> Logout </button>
+
 
 <div class="category-filters">
     {{#each categories}}

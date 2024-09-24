@@ -6,7 +6,11 @@ import { ProductManager } from "./controllers/product--manager.js"
 import mongoose from 'mongoose' 
 import productsRouter from "./routes/products.router.js"
 import cartsRouter from "./routes/cart.router.js"
-import ProductsModel from './models/products.model.js' 
+import ProductsModel from './models/products.model.js'
+import passport from 'passport'
+import cookieParser from 'cookie-parser'
+import usuarioRouter from "./routes/usuario.router.js" 
+import initializePassport from './config/passport.config.js'
 
 
 const manager = new ProductManager()  
@@ -22,10 +26,18 @@ app.set("views","./src/views")
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(cookieParser())
+initializePassport()
+app.use(passport.initialize())
+
+
 
 app.use("/", productsRouter)
 app.use("/", viewsRouter)
 app.use("/",cartsRouter)
+app.use("/", usuarioRouter)
+app.use("/api/sessions", usuarioRouter)
+
 
 app.use(express.static ("./src/public"))
 
