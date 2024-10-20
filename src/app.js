@@ -2,7 +2,7 @@ import express from 'express'
 import viewsRouter from "./routes/views.router.js"
 import exphbs from "express-handlebars"
 import { Server } from 'socket.io' 
-import { ProductManager } from "./dao/db/product--manager.js" 
+import  ProductManager  from "./dao/db/product--manager.js" 
 import mongoose from 'mongoose' 
 import productsRouter from "./routes/products.router.js"
 import cartsRouter from "./routes/cart.router.js"

@@ -3,7 +3,7 @@
     <h1 class="title_index">EL MERCADER DE VENECIA</h1>
 
     {{#if user}}
-        <h2>¡Bienvenido, {{user.firstName}} {{user.lastName}}!</h2>
+        <h2>¡Bienvenido, {{user.user}} !</h2>
         <form action="/api/sessions/logout" method="POST">
             <button type="submit">Logout</button>
         </form>

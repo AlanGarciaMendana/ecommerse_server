@@ -1,7 +1,7 @@
 import CartsModel from "../models/carts.model.js" 
 import ProductsModel from "../models/products.model.js" 
 
-export class CartManager{
+ class CartManager{
 
         async addCart() {        
 try {
@@ -125,3 +125,4 @@ try {
         }
 }
 
+export default CartManager

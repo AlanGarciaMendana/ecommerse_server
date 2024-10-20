@@ -35,10 +35,12 @@ const userService = new UserService()
                 newUser.cart = newCart._id 
                 await userDao.save(newUser)
     
-            
-                const userDTO = new UserDTO(newUser)
+          
     
-                const token = jwt.sign({ user: userDTO }, "coderhouse", { expiresIn: "1h" })
+                const token = jwt.sign({  user: `${newUser.firstName} ${newUser.lastName}`,
+                    email: newUser.email,
+                    rol: newUser.rol,
+                cart: newUser.cart }, "coderhouse", { expiresIn: "1h" })
     
              
                 res.cookie("coderCookieToken", token, {
@@ -66,10 +68,13 @@ const userService = new UserService()
                 }
     
         
-                const userDTO = new UserDTO(user)
+              
                 
         
-                const token = jwt.sign({ user: userDTO }, "coderhouse", { expiresIn: "1h" })
+                const token = jwt.sign({  user: `${user.firstName} ${user.lastName}`,
+                    email: user.email,
+                    rol: user.rol,
+                cart: user.cart }, "coderhouse", { expiresIn: "1h" })
     
             
                 res.cookie("coderCookieToken", token, {
@@ -89,6 +94,7 @@ const userService = new UserService()
             if (req.user) {
                 const user = req.user
                 const userDTO = new UserDTO(user)
+                console.log(user)
                 res.render("home", { user: userDTO }) 
             } else {
                 res.redirect("/login") 

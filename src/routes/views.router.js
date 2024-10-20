@@ -1,9 +1,10 @@
 import { Router } from "express"
-import { ProductManager } from "../dao/db/product--manager.js" 
+import  ProductManager  from "../dao/db/product--manager.js" 
 import ProductsModel from "../dao/models/products.model.js" 
-import { CartManager } from "../dao/db/cart--manager.js"
+import  CartManager  from "../dao/db/cart--manager.js"
 import jwt from "jsonwebtoken"
-import  { permissionAdmin } from "../middlewares/auth.js"
+import {soloAdmin} from "../middlewares/auth.js"
+import passport from "passport";
 
 
 const router = Router()
@@ -35,7 +36,7 @@ router.get("/", async (req, res) => {
               console.error("Token inválido o expirado:", err)
           }
       }
-console.log(user)
+     
       
       res.render("home", {
           arrayProducts: arrayProductsfinal,
@@ -46,8 +47,9 @@ console.log(user)
           currentPage: arrayProducts.page,
           totalPages: arrayProducts.totalPages,
           categories,
-          user,
+          user
       })
+
 
   } catch (error) {
       console.error("Error al obtener los productos:", error)
@@ -55,8 +57,7 @@ console.log(user)
   }
 })
 
-router.get("/realtimeproducts", async (req,res)=>{
-  
+router.get("/realtimeproducts",passport.authenticate("current", {session: false}),  soloAdmin, async (req,res)=>{
     await console.log("realtimeproducts")
     res.render("realtimeproducts")
 })

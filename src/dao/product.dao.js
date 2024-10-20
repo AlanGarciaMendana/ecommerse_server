@@ -24,4 +24,4 @@ class ProductDao {
 
 }
 
-export default new ProductDao() 
+export default ProductDao 

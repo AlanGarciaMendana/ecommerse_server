@@ -2,7 +2,7 @@ import ProductsModel from "../dao/models/products.model.js"
 
 const productsModel = new ProductsModel()
 
-class productoControler {
+class ProductControler {
 
     async getProducts (req,res){
         try {
@@ -109,4 +109,4 @@ class productoControler {
 
     }
 }
-export default productoControler
+export default ProductControler

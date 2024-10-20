@@ -3,7 +3,7 @@ import userModel from "../dao/models/user.model.js"
 import jwt from "jsonwebtoken"
 import { createHash, isValidPassword } from "../utils/utils.js"
 import passport from "passport"
-import { CartManager } from "../dao/db/cart--manager.js" 
+import  CartManager  from "../dao/db/cart--manager.js" 
 import UserControler from "../controllers/user.controler.js"
 
 const userControler = new UserControler()

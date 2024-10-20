@@ -1,17 +1,19 @@
-export function permissionAdmin (req, res, next) {
-    if(req.user.role === "admin") {
-        next() 
+
+
+export function soloAdmin(req, res, next) {
+    if(req.user.rol === "admin") {
+        next(); 
     } else {
-        res.status(403).send("Acceso denegado") 
+        res.status(403).send("Acceso denegado"); 
     }
 }
 
 
-export function permissionUser (req, res, next) {
-    if(req.user.role === "user") {
-        next() 
+export function soloUser(req, res, next) {
+    if(req.user.rol === "user") {
+        next(); 
     } else {
-        res.status(403).send("Acceso denegado")
+        res.status(403).send("Acceso denegado");
     }
 
 }

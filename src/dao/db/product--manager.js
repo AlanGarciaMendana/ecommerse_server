@@ -1,7 +1,7 @@
 import ProductsModel from "../models/products.model.js"
 
 
- export class ProductManager{
+  class ProductManager{
    
 
     async addProduct({ title, description, code, price, stock, category }) {
@@ -85,5 +85,5 @@ import ProductsModel from "../models/products.model.js"
         }
 }
 
-
+export default ProductManager
     
