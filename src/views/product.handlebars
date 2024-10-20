@@ -10,12 +10,12 @@
 
 <div class="cardproduct_container2">
     <div class="product_card2">
-        <h2 class="product_card_title">{{producto.title}}</h2>
-           <p class="product_card_p">Codigo: {{producto.code}}</p>
-              <p class="product_card_p">Descripcion: {{producto.description}}</p>
-                 <p class="product_card_p">Categoria: {{producto.category}}</p>
-        <p class="product_card_p">Precio: ${{producto.price}}</p>
-           <p class="product_card_p">Stock:{{producto.stock}}</p>
+        <h2 class="product_card_title">{{product.title}}</h2>
+           <p class="product_card_p">Codigo: {{product.code}}</p>
+              <p class="product_card_p">Descripcion: {{product.description}}</p>
+                 <p class="product_card_p">Categoria: {{product.category}}</p>
+        <p class="product_card_p">Precio: ${{product.price}}</p>
+           <p class="product_card_p">Stock:{{product.stock}}</p>
         <button class="bttn_newproduct">Agregar al carrito</button>
     </div>
     <div>
@@ -24,7 +24,7 @@
 <div class="carousel">
     <button class="carousel-button prev" id="prevBtn">&lt;</button>
     <div class="carousel-inner">
-        {{#each productosRelacionados}}
+        {{#each productsRelated}}
             <div class="carousel-item">
                 <div class="product_card2">
                     <h2 class="product_card_title">{{this.title}}</h2>

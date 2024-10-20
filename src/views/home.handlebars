@@ -2,10 +2,15 @@
     
     <h1 class="title_index">EL MERCADER DE VENECIA</h1>
 
-    <h2>¡Bienvenido, {{firstName}} {{lastName}}!</h2>
-    <form action="/api/sessions/logout" method="POST">
-    <button type="submit"> Logout </button>
-
+    {{#if user}}
+        <h2>¡Bienvenido, {{user.firstName}} {{user.lastName}}!</h2>
+        <form action="/api/sessions/logout" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+    {{else}}
+        <p>No has iniciado sesión.</p>
+        <a href="/login">Iniciar sesión</a>
+    {{/if}}
 
 <div class="category-filters">
     {{#each categories}}
@@ -15,7 +20,7 @@
       <hr>
 <div class="cardproduct_container">
    
-    {{#each arrayProductos}}
+    {{#each arrayProducts}}
     <div class="product_card">
         <h2 class="product_card_title">{{this.title}}</h2>
         <p class="product_card_p">Precio: ${{this.price}}</p>

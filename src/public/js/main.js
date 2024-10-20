@@ -94,7 +94,7 @@ socket.emit("deleteproduct",id)
         let currentIndex = 0;
     
         function updateCarousel() {
-            if (items.length === 0) return; // Si no hay elementos, no hacer nada
+            if (items.length === 0) return; 
             items.forEach((item, index) => {
                 item.style.transform = `translateX(${(index - currentIndex) * 100}%)`;
             });
@@ -110,6 +110,6 @@ socket.emit("deleteproduct",id)
             updateCarousel();
         });
     
-        updateCarousel(); // Inicializa la posición del carrusel
+        updateCarousel(); 
     });
 

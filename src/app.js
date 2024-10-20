@@ -2,14 +2,14 @@ import express from 'express'
 import viewsRouter from "./routes/views.router.js"
 import exphbs from "express-handlebars"
 import { Server } from 'socket.io' 
-import { ProductManager } from "./controllers/product--manager.js" 
+import { ProductManager } from "./dao/db/product--manager.js" 
 import mongoose from 'mongoose' 
 import productsRouter from "./routes/products.router.js"
 import cartsRouter from "./routes/cart.router.js"
-import ProductsModel from './models/products.model.js'
+import ProductsModel from './dao/models/products.model.js'
 import passport from 'passport'
 import cookieParser from 'cookie-parser'
-import usuarioRouter from "./routes/usuario.router.js" 
+import userRouter from "./routes/user.router.js" 
 import initializePassport from './config/passport.config.js'
 
 
@@ -35,8 +35,8 @@ app.use(passport.initialize())
 app.use("/", productsRouter)
 app.use("/", viewsRouter)
 app.use("/",cartsRouter)
-app.use("/", usuarioRouter)
-app.use("/api/sessions", usuarioRouter)
+app.use("/", userRouter)
+app.use("/api/sessions", userRouter)
 
 
 app.use(express.static ("./src/public"))
