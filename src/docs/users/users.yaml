@@ -1,0 +1,106 @@
+paths:
+  /register:
+    post:
+      summary: Registrar un nuevo usuario
+      description: Registra un nuevo usuario en el sistema.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Usuario registrado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  email:
+                    type: string
+                  name:
+                    type: string
+
+  /login:
+    post:
+      summary: Iniciar sesión
+      description: Permite a un usuario iniciar sesión en el sistema.
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Inicio de sesión exitoso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      email:
+                        type: string
+                      name:
+                        type: string
+
+  /logout:
+    post:
+      summary: Cerrar sesión
+      description: Permite a un usuario cerrar sesión en el sistema.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Sesión cerrada exitosamente
+
+  /current:
+    get:
+      summary: Obtener información del usuario actual
+      description: Devuelve los datos del usuario que ha iniciado sesión.
+      tags:
+        - Users
+      security:
+        - current: []
+      responses:
+        '200':
+          description: Datos del usuario actual
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  email:
+                    type: string
+                  name:
+                    type: string

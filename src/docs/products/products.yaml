@@ -1,0 +1,215 @@
+paths:
+  /api/carts:
+    get:
+      summary: Obtener todos los carritos
+      description: Devuelve una lista de todos los carritos de compras.
+      tags:
+        - Products
+      responses:
+        '200':
+          description: Lista de carritos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          productId:
+                            type: string
+                          quantity:
+                            type: integer
+    post:
+      summary: Crear un carrito nuevo
+      description: Crea un nuevo carrito de compras vacío.
+      tags:
+        - Products
+      responses:
+        '201':
+          description: Carrito creado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        productId:
+                          type: string
+                        quantity:
+                          type: integer
+
+  /api/carts/{id}:
+    get:
+      summary: Obtener carrito por ID
+      description: Devuelve los detalles de un carrito de compras basado en su ID.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: El ID del carrito.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Detalles del carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        productId:
+                          type: string
+                        quantity:
+                          type: integer
+
+  /{cid}/product/{pid}:
+    post:
+      summary: Agregar un producto a un carrito
+      description: Agrega un producto al carrito especificado por el ID del carrito.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: El ID del carrito.
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: El ID del producto a agregar.
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Producto agregado al carrito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  productId:
+                    type: string
+                  quantity:
+                    type: integer
+
+  /api/carts/{cid}/products/{pid}:
+    delete:
+      summary: Eliminar un producto del carrito
+      description: Elimina un producto específico del carrito por sus ID.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: El ID del carrito.
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: El ID del producto a eliminar.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Producto eliminado del carrito
+
+  /api/carts/{cid}:
+    delete:
+      summary: Eliminar un carrito
+      description: Elimina un carrito de compras por su ID.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: El ID del carrito.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Carrito eliminado
+  
+  2/api/carts/{cid}/products/{pid}:
+    post:
+      summary: Modificar la cantidad de un producto en el carrito
+      description: Cambia la cantidad de un producto específico dentro del carrito.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: El ID del carrito.
+          schema:
+            type: string
+        - in: path
+          name: pid
+          required: true
+          description: El ID del producto a modificar.
+          schema:
+            type: string
+        - in: query
+          name: quantity
+          required: true
+          description: La nueva cantidad del producto.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cantidad del producto actualizada
+
+  /{cid}/purchase:
+    get:
+      summary: Realizar la compra del carrito
+      description: Procesa la compra del carrito especificado por su ID.
+      tags:
+        - Products
+      parameters:
+        - in: path
+          name: cid
+          required: true
+          description: El ID del carrito a comprar.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Compra procesada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ticketId:
+                    type: string
+                  totalAmount:
+                    type: number
+                    format: float           

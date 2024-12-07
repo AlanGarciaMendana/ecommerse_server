@@ -11,24 +11,48 @@ import passport from 'passport'
 import cookieParser from 'cookie-parser'
 import userRouter from "./routes/user.router.js" 
 import initializePassport from './config/passport.config.js'
+import addLogger from "./utils/logger.js"
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+import swaggerJSDoc from 'swagger-jsdoc'
+import swaggerUiExpress from "swagger-ui-express"
 
 
-const manager = new ProductManager()  
+const manager = new ProductManager()
 
 const app = express() 
 const PUERTO = 8080
 
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
+
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.1',
+        info: {
+            title: 'Mercader Api',
+            description: 'Documentación del mercader de venecia',
+        },
+    },
+    apis: [`${__dirname}/docs/**/*.yaml`],
+};
+const specs = swaggerJSDoc(swaggerOptions)
 
 app.engine("handlebars",exphbs.engine())
 app.set("view engine","handlebars")
 app.set("views","./src/views")
+
+
+app.use("/apidocs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs))
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 initializePassport()
 app.use(passport.initialize())
+app.use(addLogger)
 
 
 

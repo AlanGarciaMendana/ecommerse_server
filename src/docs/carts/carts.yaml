@@ -1,0 +1,87 @@
+paths:
+  /api/carts:
+    get:
+      
+      summary: "Obtener todos los carritos"
+      description: "Devuelve una lista de todos los carritos de compras."
+      tags:
+        - Carts
+      responses:
+        '200':
+          description: "Lista de carritos"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    products:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          productId:
+                            type: string
+                          quantity:
+                            type: integer
+    post:
+      
+      summary: "Crear un carrito nuevo"
+      description: "Crea un nuevo carrito de compras vacío."
+      tags:
+        - Carts
+      responses:
+        '201':
+          description: "Carrito creado"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        productId:
+                          type: string
+                        quantity:
+                          type: integer
+  /api/carts/{id}:
+    get:
+      
+      summary: "Obtener carrito por ID"
+      description: "Devuelve los detalles de un carrito de compras basado en su ID."
+      tags:
+        - Carts
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: "El ID del carrito."
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Detalles del carrito"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  products:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        productId:
+                          type: string
+                        quantity:
+                          type: integer
